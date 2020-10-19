@@ -35,10 +35,7 @@ def dot(v0, v1):
   return v0.x * v1.x + v0.y * v1.y + v0.z * v1.z
 
 def cross(v0, v1):
-  """
-    Input: 2 size 3 vectors
-    Output: Size 3 vector with the cross product
-  """
+
   return V3(
     v0.y * v1.z - v0.z * v1.y,
     v0.z * v1.x - v0.x * v1.z,
@@ -83,18 +80,14 @@ def bbox(*vertices):
 
 
 def barycentric(A, B, C, P):
-  """
-    Input: 3 size 2 vectors and a point
-    Output: 3 barycentric coordinates of the point in relation to the triangle formed
-            * returns -1, -1, -1 for degenerate triangles
-  """
+
   bary = cross(
     V3(C.x - A.x, B.x - A.x, A.x - P.x),
     V3(C.y - A.y, B.y - A.y, A.y - P.y)
   )
 
   if abs(bary.z) < 1:
-    return -1, -1, -1   # this triangle is degenerate, return anything outside
+    return -1, -1, -1
 
   return (
     1 - (bary.x + bary.y) / bary.z,

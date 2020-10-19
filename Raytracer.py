@@ -213,22 +213,75 @@ class Raytracer(object):
 #Create ---------------------------------------------------------
 ivory = Material(diffuse=color(100, 100, 80), albedo=(0.6, 0.3, 0.1, 0), spec=50)
 rubber = Material(diffuse=color(80, 0, 0), albedo=(0.9, 0.1, 0, 0, 0), spec=10)
+leaves = Material(texture=Texture('./Textures/leaves.bmp'))
+leaves2 = Material(diffuse=color(157,178,75), albedo=(0.9, 0.1, 0, 0, 0),spec=10)
+wood = Material(diffuse=color(191,143,84), albedo=(0.6, 0.3, 0.1, 0), spec= 10)
 mirror = Material(diffuse=color(255, 255, 255), albedo=(0, 10, 0.8, 0), spec=1425)
 glass = Material(diffuse=color(150, 180, 200), albedo=(0, 0.5, 0.1, 0.8), spec=125, refractive_index=1.5)
-
+white = Material(diffuse=color(255,255,255), albedo=(0.9, 0.1, 0, 0, 0), spec=10)
+black = Material(diffuse=color(0, 0, 0), albedo=(0.6, 0.3, 0.1, 0), spec=50)
 
 
 r = Raytracer('Proyecto_2.bmp')
-r.glCreateWindow(800,600)
+r.glCreateWindow(152,152)
 r.glClear()
 
 r.light = Light(
-  position=V3(-20, 20, 20),
+  position=V3(20, 20, 20),
   intensity=1.5
 )
 
 r.scene = [
-  Triangle([V3(0, 0, -5), V3(2, 0, -5), V3(1, 1, -5),], rubber)
+  #tree
+  Cube(V3(-4.25, -1, -14), 1.25, wood),
+  Cube(V3(-4.25, -1.75, -14), 1.25, wood),
+  Cube(V3(-4.25, -0.5, -14), 1.25, wood),
+  # #Leaves
+  #  #3
+  Cube(V3(-3,3,-13),1.25, leaves2),
+  # #
+  # # #2
+  Cube(V3(-5,2,-13),1.25, leaves2),
+  Cube(V3(-3.75,2,-13),1.25, leaves2),
+  Cube(V3(-2.5,2,-13),1.25, leaves2),
+  # #
+  # # #1
+  Cube(V3(-1.75, 0.75, -13), 1.25, leaves2),
+  Cube(V3(-2.75, 0.75, -13), 1.25, leaves2),
+  Cube(V3(-3.75, 0.75, -13), 1.25, leaves2),
+  Cube(V3(-5,0.75,-13),1.25, leaves2), #origen
+  Cube(V3(-6, 0.75, -13), 1.25, leaves2),
+
+  # Person
+  Cube(V3(0, -0.15, -6.5), 0.75, ivory),
+  #shirt
+  Cube(V3(0, -1, -6.5), 0.75, rubber),
+  Cube(V3(0, -1.5, -6.5), 0.84, rubber),
+  # #Left arm
+  Cube(V3(-0.5, -1, -6.5), 0.5, rubber),
+  # #Right arm
+  Cube(V3(0.5, -1, -6.5), 0.5, rubber),
+  #
+  # #hands
+  Cube(V3(-0.5, -1.3125, -6.5), 0.35, ivory),
+  Cube(V3(0.5, -1.3125, -6.5), 0.35, ivory),
+
+  #Eyes
+  Cube(V3(-0.1375, -0.125, -6),0.125, white),
+  Cube(V3(0.1375, -0.125, -6), 0.125, white),
+
+  #Pupils
+  Cube(V3(-0.1375, -0.125, -5.5),0.0625, black),
+  Cube(V3(0.1375, -0.125, -5.5),0.0625, black),
+
+  #Pants
+  Cube(V3(-0.1875, -2.15, -6.5),0.4, ivory),
+  Cube(V3(-0.1875, -2.5, -6.5),0.4, ivory),
+  Cube(V3(0.2625, -2.15, -6.5), 0.4, ivory),
+  Cube(V3(0.2625, -2.5, -6.5), 0.4, ivory),
+
+  #Plane(V3(0, -2.75, -10), V3(0,1, 0.001) , ivory)
+  #Triangle([V3(0, 0, -5), V3(2, 0, -5), V3(1, 1, -5),], rubber)
 ]
 
 r.render()
