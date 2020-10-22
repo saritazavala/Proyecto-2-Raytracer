@@ -19,10 +19,11 @@ class Material(object):
     self.texture = texture
 
 class Intersect(object):
-  def __init__(self, distance=0, point=None, normal= None):
+  def __init__(self, distance=0, point=None, normal= None, texCoords = None):
     self.distance = distance
     self.point = point
     self.normal = normal
+    self.texCoords = texCoords
 
 
 # Sphere class

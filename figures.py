@@ -1,5 +1,6 @@
 from mathFunctions import *
 from utils import *
+from math import *
 
 class Sphere(object):
   def __init__(self, center, radius, material):
@@ -123,10 +124,24 @@ class Cube(object):
                                 t = planeInter.distance
                                 intersect = planeInter
 
+                                if abs(plane.normal[0]) > 0:
+                                    u = (planeInter.point[1] - minBounds[1]) / (maxBounds[1] - minBounds[1])
+                                    v = (planeInter.point[2] - minBounds[2]) / (maxBounds[2] - minBounds[2])
+
+                                elif abs(plane.normal[1]) > 0:
+                                    u = (planeInter.point[0] - minBounds[0]) / (maxBounds[0] - minBounds[0])
+                                    v = (planeInter.point[2] - minBounds[2]) / (maxBounds[2] - minBounds[2])
+
+                                elif abs(plane.normal[2]) > 0:
+                                    u = (planeInter.point[0] - minBounds[0]) / (maxBounds[0] - minBounds[0])
+                                    v = (planeInter.point[1] - minBounds[1]) / (maxBounds[1] - minBounds[1])
+
+                                coords = [u, v]
+
         if intersect is None:
             return None
 
         return Intersect(distance=intersect.distance,
                          point=intersect.point,
+                         texCoords=coords,
                          normal=intersect.normal)
-
