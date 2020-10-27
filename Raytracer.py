@@ -261,8 +261,6 @@ r.light = Light(
   position=V3(-20, 20, 20),
   intensity=1.5
 )
-import time
-start_time = time.time()
 
 r.scene = [
   #Bubbles
@@ -533,4 +531,3 @@ Cube(V3(1.5, -4.5, -10.5), 0.5, dog_body),
 
 r.render()
 r.glFinish()
-print("--- Render done in %s seconds ---" % (time.time() - start_time))
